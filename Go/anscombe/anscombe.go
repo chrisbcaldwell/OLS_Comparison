@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
 	"time"
@@ -82,7 +83,13 @@ func regression(data stats.Series) (slope float64, intercept float64, err error)
 	if err != nil {
 		return math.NaN(), math.NaN(), err
 	}
-	slope = (r[1].Y - r[0].Y) / (r[1].X - r[0].X)
-	intercept = r[0].Y - slope*r[0].X
-	return slope, intercept, nil
+	for i := 1; i < len(r); i++ {
+		if r[0].X != r[i].X {
+			slope = (r[i].Y - r[0].Y) / (r[i].X - r[0].X)
+			intercept = r[0].Y - slope*r[0].X
+			return slope, intercept, nil
+		}
+
+	}
+	return math.NaN(), math.NaN(), errors.New("can not calculate slope if all x values are equal")
 }
