@@ -23,13 +23,13 @@ func TestRegression(t *testing.T) {
 		t.Error("Error performing test regression")
 	}
 	if math.Abs(slope-exSlope) > tolerance {
-		t.Log("Expected slope: %s\n", exSlope)
-		t.Log("Result slope: %s\n", slope)
+		t.Log("Expected slope:", exSlope)
+		t.Log("Result slope:", slope)
 		t.Error("Test regression slope does not match expected")
 	}
 	if math.Abs(intercept-exIntercept) > tolerance {
-		t.Log("Expected intercept: %s\n", exIntercept)
-		t.Log("Result intercept: %s\n", intercept)
+		t.Log("Expected intercept:", exIntercept)
+		t.Log("Result intercept:", intercept)
 		t.Error("Test regression intercept does not match expected")
 	}
 }

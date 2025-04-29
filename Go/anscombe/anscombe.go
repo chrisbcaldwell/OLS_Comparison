@@ -82,11 +82,6 @@ func regression(data stats.Series) (slope float64, intercept float64, err error)
 	if err != nil {
 		return math.NaN(), math.NaN(), err
 	}
-	var X, Y stats.Float64Data
-	for i := 0; i < len(data); i++ {
-		X = append(X, r[i].X)
-		Y = append(Y, r[i].Y)
-	}
 	slope = (r[1].Y - r[0].Y) / (r[1].X - r[0].X)
 	intercept = r[0].Y - slope*r[0].X
 	return slope, intercept, nil
